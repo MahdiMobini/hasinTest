@@ -1,0 +1,15 @@
+services:
+  web:
+    build: .
+    container_name: django_access_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - db_data:/data
+    environment:
+      SQLITE_DB_PATH: /data/db.sqlite3
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+volumes:
+  db_data:
