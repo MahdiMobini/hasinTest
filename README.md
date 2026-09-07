@@ -15,7 +15,7 @@ from test_api.models import Country
 
 Country.objects.get_or_create(
     name="russia",
-    defaults={"p_type": Country.AccessType.SEMI_DENIED},
+    defaults={"p_type": Country.AccessType.SEMI_ACCESS},
 )
 ```
 
