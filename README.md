@@ -3,15 +3,15 @@ run:
 
 add first data (russia) with shell:
     docker compose exec web python manage.py shell
-
 then:
     from test_api.models import Country
     Country.objects.get_or_create(
         name="russia",
-        defaults={"p_type": Country.AccessType.SEMI_ACCESS},
+        defaults={"p_type": Country.AccessType.SEMI_DENIED},
     )
 
-you can also change p_type between: FULL_ACCESS / FULL_DENIED /SEMI_ACCESS / SEMI_DENIED
+you can also change p_type between: FULL_ACCESS / FULL_DENIED / SEMI_ACCESS / SEMI_DENIED
+for update use: Country.objects.filter(name="russia").update(p_type=Country.AccessType.SEMI_DENIED)
 
 test with curl:
     curl -i http://localhost:8000/
@@ -31,3 +31,5 @@ expected:
     1. 200 OK
     2. 403 Forbidden
     3. 200 OK
+
+you can also add data via http://localhost:8000/admin but don't forget to create a superuser first with python manage.py createsuperuser
